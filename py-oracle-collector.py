@@ -268,7 +268,7 @@ class OraStats():
                 free_space_mb = row[3]
                 free_percent = row[4]
                 max_free_mb = row[5]
-                result_string = "oracle_tablespaces,fqdn={0},delphix={1},db={2},tbs_name={3} total_size_mb={4},used_space_mb={4},free_space_mb={5},free_percent={6},max_free_mb={7} {timestamp}".format(fqdn, self.delengine, self.sid, re.sub(' ', '_', tbs_name), total_size_mb,used_space_mb,free_space_mb,free_percent,max_free_mb, timestamp=self.timestamp)
+                result_string = "oracle_tablespaces,fqdn={0},delphix={1},db={2},tbs_name={3} total_size_mb={4},used_space_mb={5},free_space_mb={6},free_percent={7},max_free_mb={8} {timestamp}".format(fqdn, self.delengine, self.sid, re.sub(' ', '_', tbs_name), total_size_mb,used_space_mb,free_space_mb,free_percent,max_free_mb, timestamp=self.timestamp)
                 print(result_string)
                 data.append(result_string)
                 
@@ -286,7 +286,7 @@ class OraStats():
                     ((FREE_MB - REQUIRED_MIRROR_FREE_MB))/1024 USABLE_CALC_GB,
                     type,
                     state
-            from    v$asm_diskgroup;
+            from    v$asm_diskgroup
             """)
             for row in cursor:
                 dg_number = row[0]
@@ -315,7 +315,7 @@ class OraStats():
                     ((FREE_MB - REQUIRED_MIRROR_FREE_MB))/1024 USABLE_CALC_GB,
                     type,
                     state
-            from    v$asm_diskgroup;
+            from    v$asm_diskgroup
             """)
             for row in cursor:
                 dg_number = row[0]
@@ -472,7 +472,7 @@ sched = BackgroundScheduler(daemon=True)
 # sched.add_job(get_app_id,'cron',hour='13',minute='31')
 # sched.add_job(get_app_id,'interval', seconds=30)
 # sched.add_job(write_smd_bypass_status, 'interval', seconds=30)
-sched.add_job(oracle_exporter, 'interval', seconds=5)
+sched.add_job(oracle_exporter, 'interval', seconds=30)
 sched.add_job(oracle_ontime_exporter,'cron',hour='08',minute='00')
 sched.start()
 
